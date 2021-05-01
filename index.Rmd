@@ -2,7 +2,7 @@
 title: "Wild 6900 sp21 Final Project"
 author: "Nathan Floyd"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: html
 description:
 documentclass: book
 link-citations: yes
@@ -12,6 +12,6 @@ bibliography:
 site: bookdown::bookdown_site
 biblio-style: apalike
 ---
-#Introduction
+# 
 
  

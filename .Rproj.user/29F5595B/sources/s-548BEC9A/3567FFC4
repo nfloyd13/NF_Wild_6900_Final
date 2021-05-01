@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1473995677",
+    "hash" : "1269984046",
     "id" : "3567FFC4",
-    "lastKnownWriteTime" : 1619736922,
-    "last_content_update" : 1619736922276,
+    "lastKnownWriteTime" : 1619842365,
+    "last_content_update" : 1619842365334,
     "path" : "~/WILD6900sp21/nf_final_project/bookdown/NF_Final_Project/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "14,13",
+        "cursorPosition" : "14,2",
         "scrollLine" : "0"
     },
     "read_only" : false,

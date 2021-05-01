@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1619842203939.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A87D5195",
+    "lastKnownWriteTime" : 1619842202,
+    "last_content_update" : 1619842202,
+    "path" : "~/WILD6900sp21/nf_final_project/bookdown/NF_Final_Project/NF_Final_Project.Rmd",
+    "project_path" : "NF_Final_Project.Rmd",
+    "properties" : {
+        "cursorPosition" : "249,0",
+        "scrollLine" : "20"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
