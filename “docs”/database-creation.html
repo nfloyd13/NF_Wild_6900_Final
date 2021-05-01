@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Database Creation | Wild 6900 sp21 Final Project</title>
+  <meta name="description" content="Chapter 2 Database Creation | Wild 6900 sp21 Final Project" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Database Creation | Wild 6900 sp21 Final Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Database Creation | Wild 6900 sp21 Final Project" />
+  
+  
+  
+
+<meta name="author" content="Nathan Floyd" />
+
+
+<meta name="date" content="2021-04-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="deadstock-loss-and-cause-of-death-among-domestic-range-lambs.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">NF_Wild_6900_Final</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#project-goals"><i class="fa fa-check"></i><b>1.1</b> Project Goals</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#project-outline"><i class="fa fa-check"></i><b>1.2</b> Project outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="database-creation.html"><a href="database-creation.html"><i class="fa fa-check"></i><b>2</b> Database Creation</a><ul>
+<li class="chapter" data-level="2.1" data-path="database-creation.html"><a href="database-creation.html#structure"><i class="fa fa-check"></i><b>2.1</b> Structure</a></li>
+<li class="chapter" data-level="2.2" data-path="database-creation.html"><a href="database-creation.html#the-following-are-the-steps-i-used-to-create-my-database-in-sql-using-r"><i class="fa fa-check"></i><b>2.2</b> The following are the steps I used to create my database in SQL Using R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="deadstock-loss-and-cause-of-death-among-domestic-range-lambs.html"><a href="deadstock-loss-and-cause-of-death-among-domestic-range-lambs.html"><i class="fa fa-check"></i><b>3</b> Deadstock Loss and Cause of Death Among Domestic Range Lambs</a></li>
+<li class="chapter" data-level="4" data-path="proportion-of-lamb-deaths-related-to-predation.html"><a href="proportion-of-lamb-deaths-related-to-predation.html"><i class="fa fa-check"></i><b>4</b> Proportion of Lamb Deaths Related to Predation</a><ul>
+<li class="chapter" data-level="4.1" data-path="proportion-of-lamb-deaths-related-to-predation.html"><a href="proportion-of-lamb-deaths-related-to-predation.html#intro-1"><i class="fa fa-check"></i><b>4.1</b> Intro</a></li>
+<li class="chapter" data-level="4.2" data-path="proportion-of-lamb-deaths-related-to-predation.html"><a href="proportion-of-lamb-deaths-related-to-predation.html#predator-loss"><i class="fa fa-check"></i><b>4.2</b> Predator loss</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wild 6900 sp21 Final Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="database-creation" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Database Creation</h1>
+<div id="structure" class="section level2">
+<h2><span class="header-section-number">2.1</span> Structure</h2>
+<p>Our goal is to collar approximately 10% of all lambs in the 6 Participating herds of sheep. This equates to approximately 135 collars per band and 800 collars total. When a collar indicates mortality we find the lamb and determine the cause of death using necropsies and DNA evidence. Based on what I learned in this class I created a relational database to organize my data. The structure of the database is shown below.</p>
+<div class="figure">
+<img src="C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png" alt="C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png" />
+<p class="caption">C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png</p>
+</div>
+</div>
+<div id="the-following-are-the-steps-i-used-to-create-my-database-in-sql-using-r" class="section level2">
+<h2><span class="header-section-number">2.2</span> The following are the steps I used to create my database in SQL Using R</h2>
+<p>First I loaded the required package into my library</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(DBI)</a></code></pre></div>
+<p>Then I connected R to my desired file location and named the database</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">lambs_db &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(),<span class="st">&quot;C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db&quot;</span>)</a></code></pre></div>
+<p>My first table is the master table. The primary key for this table is lamb_id, and all of the other tables are connected to each other directly, or indirectly through through this key.</p>
+<p>Master Table:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">dbExecute</span>(lambs_db, <span class="st">&quot;CREATE TABLE master (</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  lamb_id varchar(5) NOT NULL,</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  sex char(1) CHECK (sex IN (&#39;m&#39;, &#39;f&#39;)),</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">    PRIMARY KEY (lamb_id)</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">);&quot;</span>)</a></code></pre></div>
+<p>I populated the new table with my data</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">master &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/WILD6900sp21/nf_final_project/master.csv&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">dbWriteTable</span>(lambs_db, <span class="st">&quot;master&quot;</span>, master, <span class="dt">append =</span> T)</a></code></pre></div>
+<p>I then repeated these steps for each of the tables. .</p>
+<p>Killsites table:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">dbExecute</span>(lambs_db, <span class="st">&quot;CREATE TABLE Killsites (</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">killsite_id INTEGER PRIMARY KEY,</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">lamb_id varchar(5) NOT NULL,</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="st">collar_serial TEXT,</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">date TEXT,</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="st">time_hr INTEGER,</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="st">personnel TEXT,</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="st">mort_date TEXT,</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="st">utm_y INTEGER,</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="st">utm_x INTEGER,</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="st">carcass_present INTEGER,</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="st">collar_recovered INTEGER,</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="st">cod TEXT,</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="st">pred_species TEXT,</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="st">scavenging INTEGER,</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="st">fed_upon INTEGER,</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="st">bite_wounds INTEGER,</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="st">hemmoraging INTEGER,</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="st">cached INTEGER,</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="st">kill_site_found INTEGER,</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="st">sample_taken INTEGER,</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="st">FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)</span></a>
+<a class="sourceLine" id="cb6-23" title="23"><span class="st">);&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">Killsites &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/WILD6900sp21/nf_final_project/killsites.csv&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">dbWriteTable</span>(lambs_db, <span class="st">&quot;Killsites&quot;</span>, Killsites, <span class="dt">append =</span> T)</a></code></pre></div>
+<p>Collars Table:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">dbExecute</span>(lambs_db, <span class="st">&quot;CREATE TABLE collars (</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">collar_id INTEGER PRIMARY KEY,</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">shipment_number TEXT,</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="st">order_number TEXT,</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="st">serial_number TEXT,</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="st">freq VARCHAR(7)</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="st">);&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">collars &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/WILD6900sp21/nf_final_project/collars.csv&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">dbWriteTable</span>(lambs_db, <span class="st">&quot;collars&quot;</span>, collars, <span class="dt">append =</span> T)</a></code></pre></div>
+<p>Tagging Table:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">dbExecute</span>(lambs_db, <span class="st">&quot;CREATE TABLE tagging (</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">tag_id INTEGER PRIMARY KEY,</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="st">lamb_id varchar(5),</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">serial_number TEXT,</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">freq VARCHAR(6),</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="st">rancher TEXT,</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="st">tag_date TEXT,</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="st">sex TEXT,</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="st">breed TEXT,</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="st">FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="st">FOREIGN KEY(serial_number) REFERENCES collars(serial_number)</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="st">);&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">tagging &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/WILD6900sp21/nf_final_project/tagging.csv&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">dbWriteTable</span>(lambs_db, <span class="st">&quot;tagging&quot;</span>, tagging, <span class="dt">append =</span> T)</a></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deadstock-loss-and-cause-of-death-among-domestic-range-lambs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["NF_Final_Project.pdf", "NF_Final_Project.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
