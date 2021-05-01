@@ -1,0 +1,8 @@
+"0",""
+"0","dbExecute(lambs_db, ""CREATE TABLE master ("
+"0","  lamb_id varchar(5) NOT NULL,"
+"0","  sex char(1) CHECK (sex IN ('m', 'f')),"
+"0","    PRIMARY KEY (lamb_id)"
+"0",");"")"
+"2","Error: table master already exists
+"

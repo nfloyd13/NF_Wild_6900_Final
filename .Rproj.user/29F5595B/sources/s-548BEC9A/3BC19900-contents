@@ -1,0 +1,22 @@
+# Introduction {#intro}
+
+This is my final project for the spring 2021 Computational Tools for Reproducible Science class. The format and outline I used to create this project are nearly identical to what I am currently in the process of gathering for my master’s project studying depredation and cause of death of domestic lambs in Utah. The data I used for this project is both real and fictional, and it is based on what I expect to have gathered at the conclusion of my field season. Some real information I used in the project includes collar serial numbers, rancher names, and some real animal ids. Almost all of the results data is fictional and were generated randomly. In some cases, such as cause of death and predator species, I added arbitrary weights when generating the results in an attempt to create patterns that would make the data usable for the purposes of this class. The remaining data is all random, but it is within the bounds of what could be feasibly seen in my project e.g. dates, geographic locations etc.
+
+## Project Goals
+
+The goal of this project is to use what I have learned this semester to create a framework for analysis that I can use once I have acquired the real-world data for my masters. 
+
+This has been an extrordinarily difficult class for me. I don't know if I am getting old, or dumb, or if my computer was just out to get me because that's how it felt sometimes. I honesly would put this material on par with the top two hardest classes of my undergrad. I'm not sure why I have such a difficult time with the material. That being said I think what I did end up learning will be a huge asset to me. Thanks for putting the class together. This final project probably doesn't look like much, but I spent a lot of time on it and I'm pretty proud of the very small amount that I completed.
+ 
+The overall objectives of my Master's thesis are to (1) obtain data on cause-specific mortality of sheep and lambs to determine total loss due to predation vs. other causes and (2) classify predator-caused mortalities based on what predator species is responsible.
+
+
+## Project outline
+
+This book contains the following chapters:
+
+Chapter 2, Database Structure
+
+Chapter 3, Deadstock Loss and  Cause of death of domestic range             lambs
+
+Chapter 4, Proportion of lamb deaths related to predation

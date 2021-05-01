@@ -1,0 +1,420 @@
+---
+title: "NF_FinalProject_WILD6900"
+author: "Nathan Floyd"
+date: "4/29/2021"
+output: html_document
+---
+
+--- 
+title: "Wild 6900 sp21 Final Project"
+author: "Nathan Floyd"
+date: "`r Sys.Date()`"
+output: pdf_document
+description:
+documentclass: book
+link-citations: yes
+bibliography:
+- book.bib
+- packages.bib
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+#Introduction
+
+ 
+
+<!--chapter:end:index.Rmd-->
+
+# Introduction {#intro}
+
+This is my final project for the spring 2021 Computational Tools for Reproducible Science class. The format and outline I used to create this project are nearly identical to what I am currently in the process of gathering for my master’s project studying depredation and cause of death of domestic lambs in Utah. The data I used for this project is both real and fictional, and it is based on what I expect to have gathered at the conclusion of my field season. Some real information I used in the project includes collar serial numbers, rancher names, and some real animal ids. Almost all of the results data is fictional and were generated randomly. In some cases, such as cause of death and predator species, I added arbitrary weights when generating the results in an attempt to create patterns that would make the data usable for the purposes of this class. The remaining data is all random, but it is within the bounds of what could be feasibly seen in my project e.g. dates, geographic locations etc.
+
+## Project Goals
+
+The goal of this project is to use what I have learned this semester to create a framework for analysis that I can use once I have acquired the real-world data for my masters. 
+
+This has been an extrordinarily difficult class for me. I don't know if I am getting old, or dumb, or if my computer was just out to get me because that's how it felt sometimes. I honesly would put this material on par with the top two hardest classes of my undergrad. I'm not sure why I have such a difficult time with the material. That being said I think what I did end up learning will be a huge asset to me. Thanks for putting the class together. This final project probably doesn't look like much, but I spent a lot of time on it and I'm pretty proud of the very small amount that I completed.
+ 
+The overall objectives of my Master's thesis are to (1) obtain data on cause-specific mortality of sheep and lambs to determine total loss due to predation vs. other causes and (2) classify predator-caused mortalities based on what predator species is responsible.
+
+
+## Project outline
+
+This book contains the following chapters:
+
+Chapter 2, Database Structure
+
+Chapter 3, Deadstock Loss and  Cause of death of domestic range             lambs
+
+Chapter 4, Proportion of lamb deaths related to predation
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Database Creation
+
+## Structure
+
+Our goal is to collar approximately 10% of all lambs in the 6 Participating herds of sheep. This equates to approximately 135 collars per band and 800 collars total. When a collar indicates mortality we find the lamb and determine the cause of death using necropsies and DNA evidence. Based on what I learned in this class I created a relational database to organize my data. The structure of the database is shown below.
+
+![C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png](C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png)
+
+
+## The following are the steps I used to create my database in SQL Using R
+
+First I loaded the required package into my library  
+
+
+```{r}
+
+library(DBI)
+
+```
+
+
+Then I connected R to my desired file location and named the database
+
+```{r}
+
+lambs_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db")
+
+```
+
+My first table is the master table. The primary key for this table is lamb_id, and all of the other tables are connected to each other directly, or indirectly through through this key.
+
+Master Table:
+
+```{r master table, eval=FALSE}
+
+dbExecute(lambs_db, "CREATE TABLE master (
+  lamb_id varchar(5) NOT NULL,
+  sex char(1) CHECK (sex IN ('m', 'f')),
+    PRIMARY KEY (lamb_id)
+);")
+
+
+```
+
+
+I populated the new table with my data 
+
+```{r master csv}
+
+master <- read.csv("~/WILD6900sp21/nf_final_project/master.csv") 
+
+```
+
+
+```{r}
+
+dbWriteTable(lambs_db, "master", master, append = T)
+
+```
+
+I then repeated these steps for each of the tables. . 
+
+Killsites table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE Killsites (
+killsite_id INTEGER PRIMARY KEY,
+lamb_id varchar(5) NOT NULL,
+collar_serial TEXT,
+date TEXT,
+time_hr INTEGER,
+personnel TEXT,
+mort_date TEXT,
+utm_y INTEGER,
+utm_x INTEGER,
+carcass_present INTEGER,
+collar_recovered INTEGER,
+cod TEXT,
+pred_species TEXT,
+scavenging INTEGER,
+fed_upon INTEGER,
+bite_wounds INTEGER,
+hemmoraging INTEGER,
+cached INTEGER,
+kill_site_found INTEGER,
+sample_taken INTEGER,
+FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)
+);")
+
+```
+
+```{r}
+
+Killsites <- read.csv("~/WILD6900sp21/nf_final_project/killsites.csv") 
+
+```
+
+
+
+```{r}
+
+dbWriteTable(lambs_db, "Killsites", Killsites, append = T)
+
+```
+
+Collars Table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE collars (
+collar_id INTEGER PRIMARY KEY,
+shipment_number TEXT,
+order_number TEXT,
+serial_number TEXT,
+freq VARCHAR(7)
+);")
+
+```
+
+```{r}
+
+collars <- read.csv("~/WILD6900sp21/nf_final_project/collars.csv") 
+
+```
+
+
+
+
+```{r}
+
+dbWriteTable(lambs_db, "collars", collars, append = T)
+
+```
+
+
+
+Tagging Table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE tagging (
+tag_id INTEGER PRIMARY KEY,
+lamb_id varchar(5),
+serial_number TEXT,
+freq VARCHAR(6),
+rancher TEXT,
+tag_date TEXT,
+sex TEXT,
+breed TEXT,
+FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)
+FOREIGN KEY(serial_number) REFERENCES collars(serial_number)
+);")
+```
+
+```{r}
+
+tagging <- read.csv("~/WILD6900sp21/nf_final_project/tagging.csv") 
+```
+
+```{r}
+
+dbWriteTable(lambs_db, "tagging", tagging, append = T)
+```
+
+
+
+
+<!--chapter:end:02-DatabaseStructure.Rmd-->
+
+# Deadstock Loss and Cause of Death Among Domestic Range Lambs
+
+For this project cause of death for the total loss of collared lambs with be broken down into four broad categories, predation, exposure, disease, and other. 
+
+```{r, include=FALSE}
+library(DBI)
+library(tidyverse)
+library(wesanderson)
+```
+
+```{r, include=FALSE}
+
+lambs_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db")
+
+```
+
+
+```{r, include=FALSE}
+
+master <- dbGetQuery(lambs_db, "SELECT * FROM master;")
+killsites <- dbGetQuery(lambs_db, "SELECT * FROM killsites;")
+collars <- dbGetQuery(lambs_db, "SELECT * FROM collars;")
+tagging <- dbGetQuery(lambs_db, "SELECT * FROM tagging;")
+
+```
+
+```{r}
+killsites %>% 
+  pull(cod) %>% 
+  unique()
+```
+
+Other includes such things as poisoning and incidental injuries. Predation will be broken down further in the next chapter, but we expect to see the majority of predation events to be caused by coyotes (Canis latrans) cougars (Puma concolor) and black bear (Ursus americanus). 
+
+I want to know what proportion of collared lambs died from each cause during the monitoring season. 
+
+```{r}
+killsites %>%
+  group_by(cod) %>%
+  tally() %>% 
+  mutate(prop = n/nrow(killsites)) %>% 
+  ggplot(aes(x = cod, y = prop, fill = cod))+
+  geom_bar(stat = "identity")+
+  theme_light()+
+  labs(x = "Cause of Death", 
+       y = "Proportion Dead Lambs",
+       fill = " ")+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=wes_palette( "IsleofDogs1"))
+
+ 
+```
+
+
+
+
+
+
+
+
+
+
+<!--chapter:end:03-deadstockloss.Rmd-->
+
+# Proportion of Lamb Deaths Related to Predation
+
+## Intro
+
+Predation is a major concern for the domestic sheep industry. Advances in synthetic fabrics and a decrease in the demand for lamb and mutton have led to a major decline in the sheep and wool industry in the last century. Increases in predator populations and tighter restrictions on predator control measures also contribute to the hardships that sheep ranchers face. A better understanding of what predators are responsible for sheep and lamb depredations would allow for more targeted predator control efforts and it will help ensure that ranchers are adequately compensated for losses brought about by protected predator species. 
+
+In this chapter I will try to analyze and show what predators were responsible for what proportion of loss in our fictional collar database. Eventually we will also temporal, spatial and habitat differences as well as predator densities, animal husbandry practices, and other factors as they arise.
+
+## Predator loss
+
+In the fictional dataset 125 collared lambs were lost to predation. The main predators of lambs in Utah as mentioned previously are coyotes, cougars, and bears. Eagles, domestic dogs, and other mesopredators are also known to take small lambs, but these numbers are much smaller, and there were none taken by these in the fictional dataset. 
+
+
+
+```{r, include=FALSE}
+library(DBI)
+library(tidyverse)
+library(wesanderson)
+
+```
+
+```{r, include=FALSE}
+
+lambs_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db")
+
+```
+
+
+```{r, include=FALSE}
+
+master <- dbGetQuery(lambs_db, "SELECT * FROM master;")
+killsites <- dbGetQuery(lambs_db, "SELECT * FROM killsites;")
+collars <- dbGetQuery(lambs_db, "SELECT * FROM collars;")
+tagging <- dbGetQuery(lambs_db, "SELECT * FROM tagging;")
+
+```
+
+
+```{r}
+killsites %>% 
+  select(pred_species) %>%
+  filter(pred_species != "na") %>% 
+    unique()
+```
+ 
+Now to find what predators are most responsible for lamb loss. 
+
+
+```{r}
+predators <- killsites %>% 
+  select(pred_species) %>%
+  filter(pred_species !="na") %>% 
+  group_by(pred_species) %>% 
+  tally() 
+
+```
+```{r}
+predators %>% 
+  mutate(prop = n/sum(n)) %>% 
+  ggplot(aes(x = pred_species, y = prop, 
+             fill = pred_species))+
+  geom_bar(stat = "identity")+
+  theme_light()+
+  labs(x = "Predator Species", 
+       y = "Proportion of Kills",
+       fill = " ")+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=wes_palette( "Moonrise2"))
+
+predators %>% 
+  mutate(prop = n/sum(n)) %>% 
+  ggplot(aes(x = " ", y=prop, fill = pred_species)) + 
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(), 
+        plot.title = element_text(hjust=0.5)) + 
+  labs(fill="Species", 
+       x=NULL, 
+       y=NULL, 
+       title="Predators")+
+  theme_light()+
+  scale_fill_manual(values=wes_palette( "Moonrise2"))+
+  coord_polar(theta = "y", start=0)
+
+```
+
+
+
+It looks like coyotes were lamb enemy number one with cougars a close second. In reality we would probably expect to see the bear and cougar portions to be about half what we see in this dataset.
+
+
+
+Each rancher will be interested to know how they fared in comparison to the others that participated in the study so I separated the dead lambs by rancher.
+
+```{r}
+tagging %>% 
+  left_join(killsites, by ="lamb_id") %>%
+  group_by(rancher) %>%
+  select(killsite_id) %>% 
+  filter(killsite_id !="na") %>% 
+  tally() %>% 
+  mutate(proprancher = n/sum(n)) %>% 
+  ggplot(aes(x = rancher,
+             y = proprancher,
+             fill = rancher))+
+  geom_bar(stat = "identity")+
+  theme_light()+
+  labs(x = "Rancher", 
+       y = "Total Kills",
+       fill = " ")+
+  theme(legend.position = "none")+
+  scale_fill_ordinal()
+  
+ 
+
+```
+
+It appears that they all lost almost exactly the same amount of sheep, Almost like someone made up this data. 
+
+
+
+
+<!--chapter:end:04-Predators.Rmd-->
+
+@Book{xie2015,
+  title = {Dynamic Documents with {R} and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.org/knitr/},
+}
+

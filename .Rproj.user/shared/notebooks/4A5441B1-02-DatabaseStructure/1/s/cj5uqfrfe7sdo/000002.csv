@@ -1,0 +1,3 @@
+"0",""
+"0","lambs_db <- dbConnect(RSQLite::SQLite(),""C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db"")"
+"0",""

@@ -1,0 +1,61 @@
+# Deadstock Loss and Cause of Death Among Domestic Range Lambs
+
+For this project cause of death for the total loss of collared lambs with be broken down into four broad categories, predation, exposure, disease, and other. 
+
+```{r, include=FALSE}
+library(DBI)
+library(tidyverse)
+library(wesanderson)
+```
+
+```{r, include=FALSE}
+
+lambs_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db")
+
+```
+
+
+```{r, include=FALSE}
+
+master <- dbGetQuery(lambs_db, "SELECT * FROM master;")
+killsites <- dbGetQuery(lambs_db, "SELECT * FROM killsites;")
+collars <- dbGetQuery(lambs_db, "SELECT * FROM collars;")
+tagging <- dbGetQuery(lambs_db, "SELECT * FROM tagging;")
+
+```
+
+```{r}
+killsites %>% 
+  pull(cod) %>% 
+  unique()
+```
+
+Other includes such things as poisoning and incidental injuries. Predation will be broken down further in the next chapter, but we expect to see the majority of predation events to be caused by coyotes (Canis latrans) cougars (Puma concolor) and black bear (Ursus americanus). 
+
+I want to know what proportion of collared lambs died from each cause during the monitoring season. 
+
+```{r}
+killsites %>%
+  group_by(cod) %>%
+  tally() %>% 
+  mutate(prop = n/nrow(killsites)) %>% 
+  ggplot(aes(x = cod, y = prop, fill = cod))+
+  geom_bar(stat = "identity")+
+  theme_light()+
+  labs(x = "Cause of Death", 
+       y = "Proportion Dead Lambs",
+       fill = " ")+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=wes_palette( "IsleofDogs1"))
+
+ 
+```
+
+
+
+This is Highly skewed towards predation. In reality the number would be much different. Information like this will be able to guide ranchers where they can best focus their efforts when trying to protect the sheep and their livelihoods, and it can help wildlife managers more effectively manage predators to the benefit of the ranchers and the predators themselves.
+
+
+
+
+

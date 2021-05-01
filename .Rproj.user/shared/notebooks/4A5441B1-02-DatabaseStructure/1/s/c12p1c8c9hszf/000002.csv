@@ -1,0 +1,3 @@
+"0",""
+"0","dbWriteTable(lambs_db, ""Killsites"", Killsites, append = T)"
+"0",""

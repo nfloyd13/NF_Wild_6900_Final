@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1619836377419.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3706852899",
+    "id" : "C6B467B6",
+    "lastKnownWriteTime" : 1619836426,
+    "last_content_update" : 1619836426784,
+    "path" : "~/WILD6900sp21/nf_final_project/bookdown/NF_Final_Project/_bookdown.yml",
+    "project_path" : "_bookdown.yml",
+    "properties" : {
+        "cursorPosition" : "5,18",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

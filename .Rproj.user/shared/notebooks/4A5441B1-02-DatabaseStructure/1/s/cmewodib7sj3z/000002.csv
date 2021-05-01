@@ -1,0 +1,6 @@
+"0",""
+"0","Killsites <- read.csv(""~/WILD6900sp21/nf_final_project/killsites.csv"") "
+"0",""
+"2","Warning:"
+"2"," call dbDisconnect() when finished working with a connection
+"

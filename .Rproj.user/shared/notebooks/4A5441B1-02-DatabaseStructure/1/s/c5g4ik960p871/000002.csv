@@ -1,0 +1,4 @@
+"0",""
+"0","dbWriteTable(lambs_db, ""tagging"", tagging, append = T)"
+"2","Error: UNIQUE constraint failed: tagging.tag_id
+"

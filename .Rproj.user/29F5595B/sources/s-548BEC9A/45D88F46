@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1619736799291.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4134629250",
+    "id" : "45D88F46",
+    "lastKnownWriteTime" : 1619740420,
+    "last_content_update" : 1619740420873,
+    "path" : "~/WILD6900sp21/nf_final_project/bookdown/NF_Final_Project/03-deadstockloss.Rmd",
+    "project_path" : "03-deadstockloss.Rmd",
+    "properties" : {
+        "cursorPosition" : "55,365",
+        "scrollLine" : "52",
+        "source_window_id" : ""
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

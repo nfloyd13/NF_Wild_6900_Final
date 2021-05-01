@@ -1,0 +1,124 @@
+# # # # # # # # # # # # # # # #
+# # # # # Assignment 9 # # # # 
+# # # # # # # # # # # # # # # # 
+# # Data Wrangling Challenge # #
+# # # # # # # # # # # # # # # #
+
+# Using ONLY TIDYVERSE SYNTAX, write code to perform the following tasks.
+# Don't forget about style! Don't exceed 80 characters on a line, use spaces
+# after commas and before/after operators such as =, go to a new line after each
+# pipe, indent code, etc.
+
+library(tidyverse)
+library(DBI)
+
+dragons_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/dragons.db")
+
+dragons <- dbGetQuery(dragons_db, "SELECT * FROM dragons;")
+capture_sites <- dbGetQuery(dragons_db, "SELECT * FROM capture_sites;")
+captures <- dbGetQuery(dragons_db, "SELECT * FROM captures;")
+morphometrics <- dbGetQuery(dragons_db, "SELECT * FROM morphometrics;")
+diet <- dbGetQuery(dragons_db, "SELECT * FROM diet;")
+tags <- dbGetQuery(dragons_db, "SELECT * FROM tags;")
+deployments <- dbGetQuery(dragons_db, "SELECT * FROM deployments;")
+telemetry <- dbGetQuery(dragons_db, "SELECT * FROM gps_data;")
+
+
+# 1: Create table that, for each dragon, tells us whether they were 
+# tracked, measured, or had diet samples taken (DO THIS IN ONE PIPE CHAIN)
+
+dragons %>% 
+  as_tibble() %>% 
+  select(dragon_id) %>% 
+  left_join(diet, by = "dragon_id") %>% 
+  mutate(has_diet = case_when(
+    is.na(diet_id) ~ FALSE,
+    TRUE ~ TRUE
+  )) %>% 
+  select(dragon_id, has_diet) %>% 
+  left_join(morphometrics, by = "dragon_id") %>% 
+  mutate(has_morph = case_when(
+    is.na(measurement_id) ~ FALSE,
+    TRUE ~ TRUE
+  )) %>% 
+  select(dragon_id, has_diet, has_morph) %>% 
+  left_join(deployments, by = "dragon_id") %>%
+  mutate(has_gps = case_when(
+    is.na(deployment_id) ~ FALSE,
+    TRUE ~ TRUE
+  )) %>% 
+  select(dragon_id, has_diet, has_morph, has_gps) %>% 
+  distinct()
+
+  
+
+
+# 2: Percent diet composition in adult individuals that were GPS-tracked, 
+# broken down by species (DO THIS IN ONE PIPE CHAIN)
+
+diet %>% 
+  as_tibble() %>% 
+  left_join(dragons, by = "dragon_id") %>% 
+  left_join(deployments, by = "dragon_id") %>% 
+  filter(age_class == "Adult" & !is.na(deployment_id)) %>% 
+  group_by(species, item) %>% 
+  tally() %>% 
+  group_by(species) %>% 
+  mutate(percent = n/sum(n) * 100) %>% 
+  select(-n)
+  
+
+# 3: How many tags of each brand used on dragons of each age class (DO THIS IN
+# ONE PIPE CHAIN)
+
+dragons %>% 
+  as_tibble() %>% 
+  left_join(deployments, by = "dragon_id") %>% 
+  filter(!is.na(deployment_id)) %>% 
+  left_join(tags, by = "tag_id") %>% 
+  group_by(brand, age_class) %>% 
+  tally()
+  
+
+
+# 4: Who is the individual with the longest tarsus for each dragon species (DO 
+# THIS IN ONE PIPE CHAIN)
+
+dragons %>% 
+  as_tibble() %>% 
+  left_join(morphometrics, by = "dragon_id") %>% 
+  group_by(species) %>% 
+  summarize(largest_tarsus = max(tarsus_length_cm, na.rm = T)) %>% 
+  left_join(morphometrics, by = c("largest_tarsus" = "tarsus_length_cm")) %>% 
+  select(species, tarsus_length_cm = largest_tarsus, dragon_id)
+
+
+# 5: Classify dragons into large, medium, and small if they are larger than the 
+# 75 percentile, the 50 percentile, and under or equal to the 50 percentile of 
+# total body length, respectively (DO THIS IN ONE PIPE CHAIN)
+
+morphometrics %>% 
+  as_tibble() %>% 
+  mutate(size_class = case_when(
+    total_body_length_cm > quantile(total_body_length_cm, 0.75) ~ "large", 
+    total_body_length_cm > quantile(total_body_length_cm, 0.5) ~ "Medium",
+    total_body_length_cm <= quantile(total_body_length_cm, 0.5) ~ "Small"
+    ))
+
+# 6: Recombine the dragons, tags, morphometrics, diet, captures, and deployment 
+# tables into one without the serial number primary keys (DO THIS IN ONE PIPE
+# CHAIN)
+
+diet %>% 
+  as_tibble() %>% 
+  left_join(dragons, by = "dragon_id") %>% 
+  rename(diet_date = date) %>% 
+  left_join(morphometrics, by = "dragon_id") %>% 
+  rename(measurement_date = date) %>% 
+  left_join(captures, by = "dragon_id") %>%
+  rename(capture_date = date) %>% 
+  left_join(deployments, by = "dragon_id") %>% 
+  left_join(tags, by = "tag_id") %>%
+  select(-c(diet_id, measurement_id, capture_id, deployment_id))
+  
+  

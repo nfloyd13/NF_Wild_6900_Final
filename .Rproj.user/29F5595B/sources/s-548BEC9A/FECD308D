@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1619736800975.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2218115703",
+    "id" : "FECD308D",
+    "lastKnownWriteTime" : 1619738919,
+    "last_content_update" : 1619738919170,
+    "path" : "~/WILD6900sp21/nf_final_project/bookdown/NF_Final_Project/04-Predators.Rmd",
+    "project_path" : "04-Predators.Rmd",
+    "properties" : {
+        "cursorPosition" : "119,131",
+        "scrollLine" : "115"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

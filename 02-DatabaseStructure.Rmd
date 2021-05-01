@@ -1,0 +1,167 @@
+# Database Creation
+
+## Structure
+
+Our goal is to collar approximately 10% of all lambs in the 6 Participating herds of sheep. This equates to approximately 135 collars per band and 800 collars total. When a collar indicates mortality we find the lamb and determine the cause of death using necropsies and DNA evidence. Based on what I learned in this class I created a relational database to organize my data. The structure of the database is shown below.
+
+![C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png](C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/database_structure.png)
+
+
+## The following are the steps I used to create my database in SQL Using R
+
+First I loaded the required package into my library  
+
+
+```{r}
+
+library(DBI)
+
+```
+
+
+Then I connected R to my desired file location and named the database
+
+```{r}
+
+lambs_db <- dbConnect(RSQLite::SQLite(),"C:/Users/A01145342/Documents/WILD6900sp21/nf_final_project/lambs.db")
+
+```
+
+My first table is the master table. The primary key for this table is lamb_id, and all of the other tables are connected to each other directly, or indirectly through through this key.
+
+Master Table:
+
+```{r master table, eval=FALSE}
+
+dbExecute(lambs_db, "CREATE TABLE master (
+  lamb_id varchar(5) NOT NULL,
+  sex char(1) CHECK (sex IN ('m', 'f')),
+    PRIMARY KEY (lamb_id)
+);")
+
+
+```
+
+
+I populated the new table with my data 
+
+```{r master csv}
+
+master <- read.csv("~/WILD6900sp21/nf_final_project/master.csv") 
+
+```
+
+
+```{r}
+
+dbWriteTable(lambs_db, "master", master, append = T)
+
+```
+
+I then repeated these steps for each of the tables. . 
+
+Killsites table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE Killsites (
+killsite_id INTEGER PRIMARY KEY,
+lamb_id varchar(5) NOT NULL,
+collar_serial TEXT,
+date TEXT,
+time_hr INTEGER,
+personnel TEXT,
+mort_date TEXT,
+utm_y INTEGER,
+utm_x INTEGER,
+carcass_present INTEGER,
+collar_recovered INTEGER,
+cod TEXT,
+pred_species TEXT,
+scavenging INTEGER,
+fed_upon INTEGER,
+bite_wounds INTEGER,
+hemmoraging INTEGER,
+cached INTEGER,
+kill_site_found INTEGER,
+sample_taken INTEGER,
+FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)
+);")
+
+```
+
+```{r}
+
+Killsites <- read.csv("~/WILD6900sp21/nf_final_project/killsites.csv") 
+
+```
+
+
+
+```{r}
+
+dbWriteTable(lambs_db, "Killsites", Killsites, append = T)
+
+```
+
+Collars Table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE collars (
+collar_id INTEGER PRIMARY KEY,
+shipment_number TEXT,
+order_number TEXT,
+serial_number TEXT,
+freq VARCHAR(7)
+);")
+
+```
+
+```{r}
+
+collars <- read.csv("~/WILD6900sp21/nf_final_project/collars.csv") 
+
+```
+
+
+
+
+```{r}
+
+dbWriteTable(lambs_db, "collars", collars, append = T)
+
+```
+
+
+
+Tagging Table:
+
+```{r}
+
+dbExecute(lambs_db, "CREATE TABLE tagging (
+tag_id INTEGER PRIMARY KEY,
+lamb_id varchar(5),
+serial_number TEXT,
+freq VARCHAR(6),
+rancher TEXT,
+tag_date TEXT,
+sex TEXT,
+breed TEXT,
+FOREIGN KEY(lamb_id) REFERENCES master(lamb_id)
+FOREIGN KEY(serial_number) REFERENCES collars(serial_number)
+);")
+```
+
+```{r}
+
+tagging <- read.csv("~/WILD6900sp21/nf_final_project/tagging.csv") 
+```
+
+```{r}
+
+dbWriteTable(lambs_db, "tagging", tagging, append = T)
+```
+
+
+

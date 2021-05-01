@@ -1,0 +1,6 @@
+"0",""
+"0","master <- dbGetQuery(lambs_db, ""SELECT * FROM master;"")"
+"0","killsites <- dbGetQuery(lambs_db, ""SELECT * FROM killsites;"")"
+"0","collars <- dbGetQuery(lambs_db, ""SELECT * FROM collars;"")"
+"0","tagging <- dbGetQuery(lambs_db, ""SELECT * FROM tagging;"")"
+"0",""

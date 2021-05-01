@@ -1,0 +1,10 @@
+intro
+project-goals
+project-outline
+database-creation
+structure
+the-following-are-the-steps-i-used-to-create-my-database-in-sql-using-r
+deadstock-loss-and-cause-of-death-among-domestic-range-lambs
+proportion-of-lamb-deaths-related-to-predation
+intro-1
+predator-loss
